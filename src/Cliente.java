@@ -1,6 +1,6 @@
-
 public class Cliente {
 
-	
-	//lia estuvo aqui////////
+	///lia estuvo aqui 
+	private void sysout() {
+	}
 }
