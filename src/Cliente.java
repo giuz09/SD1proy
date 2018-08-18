@@ -1,10 +1,12 @@
-
 public class Cliente {
 
 	
 	///lia estuvo aqui 
 	
-	return 0;
+	private void sysout() {
+		// TODO Auto-generated method stub
+ //esto es basura de prueba
+	}
 	
 	
 }
