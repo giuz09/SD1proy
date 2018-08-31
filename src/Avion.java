@@ -4,7 +4,7 @@ public class Avion {
 	//clase cliente
 	//metodo a codificar: 
 	//					solicitarPista()
-	//					aterrizar()
+	//					aterrizar(posicion, pista array de aviones) //
 	
 	
 	

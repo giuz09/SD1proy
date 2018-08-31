@@ -1,27 +1,27 @@
 import java.rmi.RemoteException;
 import java.util.Stack;
 
-public class Servidor implements ControlGestion {
+public class Servidor implements TorreControl {
 
-	@Override
-	public boolean verificarDisponiblePista(boolean[] array) throws RemoteException {
+	
+	public Boolean verificarDisponiblePista(boolean[] array) throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+	
 	public Integer asignarPista(boolean[] array) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public Integer desasignarPista(boolean[] array) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public Stack<Boolean> asignarTurno() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
