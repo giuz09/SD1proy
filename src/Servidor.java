@@ -24,25 +24,35 @@ public class Servidor implements TorreControl {
 			asignarTurno(av); // si no esta disponible asigna turno, es decir agrega a la cola			
 		}
 		else {
-			asignarPista(p,posicionPista);
+			asignarPista(p,posicionPista,av);
 			System.err.println("Se asigno la pista nro "+posicionPista);			
 		}	
 	}
 
 	public Integer posicionDisponiblePista(Pista p) {
 		//recorre el aray y devuelve la posicion que no este ocupada
+		//este metodo dudo si va aca o en la clase pista ?¡?¡?¡?¡
 		return null;
 	}
 
-	public Integer asignarPista(Pista p, Integer posicion) {
+	public void asignarPista(Pista p, Integer posicion, Avion av) {
 		// agrega el avion al array de pista , es decir queda estacionado
-		
-		return null;
+		p.coleccionPista[posicion]= av;
+		cuentaTiempoEstacionado();
+
 	}
 
-	public Integer desasignarPista(Pista p, Integer posicion){
-		// saca el avion del aray de pista 
-		return null;
+	private void cuentaTiempoEstacionado() {
+		// Este metodo debe contar 30 segundos 
+		// cuando llega a 30 llama a desasignarPista()
+		// tambien debe fijarse si hay alguien en la cola esperando 
+		// y asigna ese avion a la pista
+		
+	}
+
+	public void desasignarPista(Pista p, Integer posicion, Avion av){
+		// saca el avion del aray de pista despues de 30 segundos
+		p.coleccionPista[posicion]= null;	
 	}
 
 }
