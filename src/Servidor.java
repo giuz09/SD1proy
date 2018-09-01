@@ -1,11 +1,32 @@
 import java.rmi.RemoteException;
 import java.util.Queue;
 import java.util.Stack;
+import java.net.InetAddress;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
-public class Servidor implements TorreControl {
+public class Servidor extends UnicastRemoteObject implements TorreControl {
+	//agreado por lo de rmi	
+	private static final long serialVersionUID = 1L;
+	Integer nroPuerto;
+	String IP;
+	Registry registro;
+	//
 	
 	Queue<Avion> colaTurnos;
-
+	
+//agreado por lo de rmi	
+	public Servidor (Integer numeroPuertoRemoto) throws Exception{
+		super();
+		IP = InetAddress.getLocalHost().getHostAddress();
+		nroPuerto = numeroPuertoRemoto;
+		registro = LocateRegistry.createRegistry(nroPuerto);
+		registro.bind("rmiServidor", this);
+		System.out.println("Servidor inicializado en ip: " + IP + "puerto: " + nroPuerto);
+	}
+//
 	
 	public Queue<Avion> asignarTurno(Avion avion) {
 		colaTurnos.add(avion);	
