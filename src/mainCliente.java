@@ -3,7 +3,7 @@ import java.rmi.RemoteException;
 
 public class mainCliente {
 	public static void main(String[] args) throws RemoteException, NotBoundException {
-		Cliente c = new Cliente("192.168.237.229", 2000);
+		Avion c = new Avion("127.0.0.1", 2000);
 	
 	}
 

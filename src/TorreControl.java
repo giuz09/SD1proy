@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Stack;
 
-public interface TorreControl {
+public interface TorreControl extends Remote {
 		
 	
 	void atenderPeticion(Pista p, Avion av);  //metodo atender peticion de las aviones llama a verificar y asignar
