@@ -1,6 +1,8 @@
 import java.rmi.RemoteException;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.net.InetAddress;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -46,7 +48,8 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 		}
 		else {
 			asignarPista(p,posicionPista,av);
-			System.err.println("Se asigno la pista nro "+posicionPista);			
+			System.err.println("Se asigno la pista nro "+posicionPista);
+			
 		}	
 	}
 
@@ -59,16 +62,34 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 	public void asignarPista(Pista p, Integer posicion, Avion av) {
 		// agrega el avion al array de pista , es decir queda estacionado
 		p.coleccionPista[posicion]= av;
-		cuentaTiempoEstacionado();
+		administraAterrizajes(av, p, posicion);
 
 	}
 
 	private void cuentaTiempoEstacionado() {
-		// Este metodo debe contar 30 segundos 
-		// cuando llega a 30 llama a desasignarPista()
+		//simulacion de los 30 segundos de aterrizaje y uso de la pista por parte del avion		
+		Timer time = new Timer();
+		TimerTask contador = new TimerTask() {
+	
+			public void run() {
+				System.out.println("El avion esta aterrizando");
+			}
+		};	
+		time.schedule(contador, 3000); //cuenta 30segundos y llama al run de contador	
+		System.out.println("El avion esta por despegar");
+	}
+	
+	public void administraAterrizajes(Avion av,Pista p, Integer posicion) {
+		cuentaTiempoEstacionado(); // cuando llega a 30 llama a desasignarPista()
+		desasignarPista(p, posicion, av);
 		// tambien debe fijarse si hay alguien en la cola esperando 
-		// y asigna ese avion a la pista
-		
+		if (colaTurnos.isEmpty()) {
+			System.out.println("Pista totalmente vacia");
+		}
+		else { 
+			colaTurnos.remove();
+			asignarPista(p, posicion, av); // y asigna ese avion a la pista
+		}			
 	}
 
 	public void desasignarPista(Pista p, Integer posicion, Avion av){
