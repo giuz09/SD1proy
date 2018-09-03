@@ -8,9 +8,18 @@ import java.util.TimerTask;
 
 public class mainCliente {
 	public static void main(String[] args) throws RemoteException, NotBoundException {
-		final Avion a = new Avion("127.0.0.1", 2000);
+		final Avion A1 = new Avion("127.0.0.1", 2000,"A1");
+		final Avion A2 = new Avion("127.0.0.1", 2000,"A2");
+		final Avion A3 = new Avion("127.0.0.1", 2000,"A3");
+		final Avion A4 = new Avion("127.0.0.1", 2000,"A4");
+		final Avion A5 = new Avion("127.0.0.1", 2000,"A5");
 		
-		a.solicitarPista(a);
+		
+		A1.solicitarPista(A1);
+		A2.solicitarPista(A2);
+		A3.solicitarPista(A3);
+		A4.solicitarPista(A4);
+		A5.solicitarPista(A5);
 		
 		/*
 		 

@@ -18,7 +18,7 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 	Registry registro;
 	//
 	ArrayList<Avion> p = new ArrayList<Avion>();
-	Queue<Avion> colaTurnos;
+	ArrayList<Avion> colaTurnos = new ArrayList<Avion>();
 	
 //agreado por lo de rmi	
 	public Servidor (Integer numeroPuertoRemoto) throws Exception{
@@ -27,13 +27,13 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 		nroPuerto = numeroPuertoRemoto;
 		registro = LocateRegistry.createRegistry(nroPuerto);
 		registro.bind("rmiServidor", this);
-		System.out.println("Servidor inicializado en ip: " + IP + "puerto: " + nroPuerto);
+		System.out.println("Servidor inicializado en ip: " + IP + " puerto: " + nroPuerto);
 	}
 //
 	
-	public Queue<Avion> asignarTurno(Avion avion) {
+	public ArrayList<Avion> asignarTurno(Avion avion) {
 		colaTurnos.add(avion);	
-		System.out.println("El avion se encuentra en la cola de espera de una pista");
+		System.out.println("El avion "+avion.getCodigoAvion()+" se encuentra en la cola de espera de una pista");
 		return colaTurnos;
 		//este metodo lo agrega a la cola solamente, no indica ningun "turno" 	
 	}
@@ -44,32 +44,18 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 		
 		//Integer posicionPista =  posicionDisponiblePista();
 		
-		if ((p.size() >= 5)) {	
+		if ((p.size()) == 5) {	
+			System.out.println("ha");
 			asignarTurno(av); // si no esta disponible asigna turno, es decir agrega a la cola			
 		}
 		else {
 			asignarPista(av);
-			System.out.println("Se asigno la pista al avion");
+			System.out.println("Se asigno una pista al avion "+av.getCodigoAvion());
 			
 		}	
 		
 	}
 
-/*	public Integer posicionDisponiblePista() {
-		//recorre el aray y devuelve la posicion que no este ocupada
-		if (!(p.isEmpty())) {
-			
-			for (int i = 0; i < 5; i++) {
-				if(p.get(i).equals(null)) {
-					return i;
-				}	
-			}
-			return -1;
-			
-		}
-		else {
-			return -1;
-		*/
 
 	public void asignarPista(Avion av) {
 		// agrega el avion al array de pista , es decir queda estacionado
@@ -89,18 +75,20 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 			}
 		};	
 		time.schedule(contador, 3000); //cuenta 30segundos y llama al run de contador	
-		System.out.println("El avion esta por despegar");
+
 	}
 	
 	public void administraAterrizajes(Avion av) {
 		cuentaTiempoEstacionado(); // cuando llega a 30 llama a desasignarPista()
+		System.out.println("El avion "+av.getCodigoAvion()+" ya aterrizo");
 		desasignarPista(av);
 		// tambien debe fijarse si hay alguien en la cola esperando 
+		
 		if (colaTurnos.isEmpty()) {
 			System.out.println("Pista totalmente vacia");
 		}
 		else { 
-			colaTurnos.remove();
+			colaTurnos.remove(0);
 			asignarPista(av); // y asigna ese avion a la pista
 		}			
 	}

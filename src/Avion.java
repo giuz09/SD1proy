@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Queue;
 
 public class Avion implements TorreControl, Serializable {
+	
+	private String codigoAvion;
 
 	//clase cliente
 	//metodo a codificar: 
@@ -17,10 +19,19 @@ public class Avion implements TorreControl, Serializable {
 	private String direccionServidor;
 	private Integer puertoServidor;
 	
-	public Avion(String ip, Integer puerto) throws RemoteException, NotBoundException{
+	public String getCodigoAvion() {
+		return codigoAvion;
+	}
+
+	public void setCodigoAvion(String codigoAvion) {
+		this.codigoAvion = codigoAvion;
+	}
+
+	public Avion(String ip, Integer puerto, String codigoAvion) throws RemoteException, NotBoundException{
 		this.direccionServidor = ip; 
 		this.puertoServidor = puerto;
 		this.conectarseAlServidor();
+		this.codigoAvion= codigoAvion;
 	}
 	
 	public void conectarseAlServidor() throws RemoteException, NotBoundException{
@@ -44,7 +55,7 @@ public class Avion implements TorreControl, Serializable {
 		
 	}
 
-	public Queue<Avion> asignarTurno(Avion avion) throws RemoteException {
+	public ArrayList<Avion> asignarTurno(Avion avion) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

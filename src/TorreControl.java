@@ -14,7 +14,7 @@ public interface TorreControl extends Remote {
 	
 	void asignarPista( Avion av)throws RemoteException; //devuelve la posicion donde aterrizar
 	
-	Queue <Avion> asignarTurno( Avion avion )throws RemoteException; //agregar a cola de turnos el avion
+	ArrayList <Avion> asignarTurno( Avion avion )throws RemoteException; //agregar a cola de turnos el avion
 	
 	void desasignarPista(Avion av)throws RemoteException; 
 	
