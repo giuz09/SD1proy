@@ -28,6 +28,6 @@ public class Avion {
 	public void solicitarPista(Pista p, Avion av) throws RemoteException{
 		//llamado el método remoto
 		rmiServidor.atenderPeticion(p, av);
-		System.out.println("El mensaje se ha enviado!!");
+		System.out.println("Solcitud enviada");
 	}
 }
