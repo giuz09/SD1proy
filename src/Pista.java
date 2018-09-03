@@ -16,6 +16,11 @@ public class Pista {
 		}
 		return -1;
 	}
+	public Pista(Avion[] coleccionPista) {
+		super();
+		this.coleccionPista = coleccionPista;
+	}
+	
 	
 	
 
