@@ -1,4 +1,5 @@
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.Timer;
@@ -16,7 +17,7 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 	String IP;
 	Registry registro;
 	//
-	
+	ArrayList<Avion> p = new ArrayList<Avion>();
 	Queue<Avion> colaTurnos;
 	
 //agreado por lo de rmi	
@@ -37,32 +38,39 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 		//este metodo lo agrega a la cola solamente, no indica ningun "turno" 	
 	}
 
-	public void atenderPeticion(Pista p, Avion av) {
+	public void atenderPeticion (Avion av) {
 		//recibe solicitud de avion solicitando pista
 		//verifica si hay pista disponible
 		
-		Integer posicionPista =  posicionDisponiblePista(p);
+		System.out.println("hola");
+		Integer posicionPista =  posicionDisponiblePista();
 		
 		if ((posicionPista == -1)) {	
 			asignarTurno(av); // si no esta disponible asigna turno, es decir agrega a la cola			
 		}
 		else {
-			asignarPista(p,posicionPista,av);
+			asignarPista(posicionPista,av);
 			System.err.println("Se asigno la pista nro "+posicionPista);
 			
 		}	
 	}
 
-	public Integer posicionDisponiblePista(Pista p) {
+	public Integer posicionDisponiblePista() {
 		//recorre el aray y devuelve la posicion que no este ocupada
-		//este metodo dudo si va aca o en la clase pista ?¡?¡?¡?¡
-		return null;
+		
+		for (int i = 0; i < 5; i++) {
+			if(p.get(i).equals(null)) {
+				return i;
+			}	
+		}
+		return -1;		
 	}
 
-	public void asignarPista(Pista p, Integer posicion, Avion av) {
+	public void asignarPista(Integer posicion, Avion av) {
 		// agrega el avion al array de pista , es decir queda estacionado
-		p.coleccionPista[posicion]= av;
-		administraAterrizajes(av, p, posicion);
+		p.add(posicion, av);
+		//p.coleccionPista[posicion]= av;
+		administraAterrizajes(av, posicion);
 
 	}
 
@@ -79,22 +87,23 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 		System.out.println("El avion esta por despegar");
 	}
 	
-	public void administraAterrizajes(Avion av,Pista p, Integer posicion) {
+	public void administraAterrizajes(Avion av, Integer posicion) {
 		cuentaTiempoEstacionado(); // cuando llega a 30 llama a desasignarPista()
-		desasignarPista(p, posicion, av);
+		desasignarPista(posicion, av);
 		// tambien debe fijarse si hay alguien en la cola esperando 
 		if (colaTurnos.isEmpty()) {
 			System.out.println("Pista totalmente vacia");
 		}
 		else { 
 			colaTurnos.remove();
-			asignarPista(p, posicion, av); // y asigna ese avion a la pista
+			asignarPista(posicion, av); // y asigna ese avion a la pista
 		}			
 	}
 
-	public void desasignarPista(Pista p, Integer posicion, Avion av){
+	public void desasignarPista(Integer posicion, Avion av){
 		// saca el avion del aray de pista despues de 30 segundos
-		p.coleccionPista[posicion]= null;	
+		p.add(posicion, null);
+		//p.coleccionPista[posicion]= null;	
 	}
 
 }

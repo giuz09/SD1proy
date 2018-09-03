@@ -16,10 +16,19 @@ public class Pista {
 		}
 		return -1;
 	}
+	
 	public Pista(Avion[] coleccionPista) {
 		super();
 		this.coleccionPista = coleccionPista;
 	}
+	public Avion[] getColeccionPista() {
+		return coleccionPista;
+	}
+	public void setColeccionPista(Avion[] coleccionPista) {
+		this.coleccionPista = coleccionPista;
+	}
+	
+	
 	
 	
 	

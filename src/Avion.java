@@ -2,8 +2,10 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
+import java.util.Queue;
 
-public class Avion {
+public class Avion implements TorreControl {
 
 	//clase cliente
 	//metodo a codificar: 
@@ -25,9 +27,35 @@ public class Avion {
 		this.rmiServidor = (TorreControl) registro.lookup("rmiServidor");
 	}
 	
-	public void solicitarPista(Pista p, Avion av) throws RemoteException{
+	public void solicitarPista(Avion av) throws RemoteException{
 		//llamado el método remoto
-		rmiServidor.atenderPeticion(p, av);
+		rmiServidor.atenderPeticion(av);
 		System.out.println("Solcitud enviada");
 	}
+
+	public void atenderPeticion(Avion av) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Integer posicionDisponiblePista() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void asignarPista(Integer posicion, Avion av) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Queue<Avion> asignarTurno(Avion avion) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void desasignarPista(Integer posicion, Avion av) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
