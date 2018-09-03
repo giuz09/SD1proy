@@ -44,13 +44,11 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 		
 		//Integer posicionPista =  posicionDisponiblePista();
 		
-		if ((p.size()) == 5) {	
-			System.out.println("ha");
+		if ((p.size()) == 5) {				
 			asignarTurno(av); // si no esta disponible asigna turno, es decir agrega a la cola			
 		}
 		else {
 			asignarPista(av);
-			System.out.println("Se asigno una pista al avion "+av.getCodigoAvion());
 			
 		}	
 		
@@ -62,6 +60,7 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 		p.add(av);
 		//p.coleccionPista[posicion]= av;
 		administraAterrizajes(av);
+		System.out.println("Pista asignada al avion: "+av.getCodigoAvion());
 
 	}
 
@@ -71,7 +70,7 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 		TimerTask contador = new TimerTask() {
 	
 			public void run() {
-				System.out.println("El avion esta aterrizando");
+				//System.out.println("El avion esta aterrizando");
 			}
 		};	
 		time.schedule(contador, 3000); //cuenta 30segundos y llama al run de contador	
@@ -80,12 +79,12 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 	
 	public void administraAterrizajes(Avion av) {
 		cuentaTiempoEstacionado(); // cuando llega a 30 llama a desasignarPista()
-		System.out.println("El avion "+av.getCodigoAvion()+" ya aterrizo");
+		
 		desasignarPista(av);
 		// tambien debe fijarse si hay alguien en la cola esperando 
 		
 		if (colaTurnos.isEmpty()) {
-			System.out.println("Pista totalmente vacia");
+			System.out.println("No hay aviones esperando en la cola");
 		}
 		else { 
 			colaTurnos.remove(0);
