@@ -42,35 +42,40 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 		//recibe solicitud de avion solicitando pista
 		//verifica si hay pista disponible
 		
-		System.out.println("hola");
-		Integer posicionPista =  posicionDisponiblePista();
+		//Integer posicionPista =  posicionDisponiblePista();
 		
-		if ((posicionPista == -1)) {	
+		if ((p.size() >= 5)) {	
 			asignarTurno(av); // si no esta disponible asigna turno, es decir agrega a la cola			
 		}
 		else {
-			asignarPista(posicionPista,av);
-			System.err.println("Se asigno la pista nro "+posicionPista);
+			asignarPista(av);
+			System.out.println("Se asigno la pista al avion");
 			
 		}	
-	}
-
-	public Integer posicionDisponiblePista() {
-		//recorre el aray y devuelve la posicion que no este ocupada
 		
-		for (int i = 0; i < 5; i++) {
-			if(p.get(i).equals(null)) {
-				return i;
-			}	
-		}
-		return -1;		
 	}
 
-	public void asignarPista(Integer posicion, Avion av) {
+/*	public Integer posicionDisponiblePista() {
+		//recorre el aray y devuelve la posicion que no este ocupada
+		if (!(p.isEmpty())) {
+			
+			for (int i = 0; i < 5; i++) {
+				if(p.get(i).equals(null)) {
+					return i;
+				}	
+			}
+			return -1;
+			
+		}
+		else {
+			return -1;
+		*/
+
+	public void asignarPista(Avion av) {
 		// agrega el avion al array de pista , es decir queda estacionado
-		p.add(posicion, av);
+		p.add(av);
 		//p.coleccionPista[posicion]= av;
-		administraAterrizajes(av, posicion);
+		administraAterrizajes(av);
 
 	}
 
@@ -87,22 +92,22 @@ public class Servidor extends UnicastRemoteObject implements TorreControl {
 		System.out.println("El avion esta por despegar");
 	}
 	
-	public void administraAterrizajes(Avion av, Integer posicion) {
+	public void administraAterrizajes(Avion av) {
 		cuentaTiempoEstacionado(); // cuando llega a 30 llama a desasignarPista()
-		desasignarPista(posicion, av);
+		desasignarPista(av);
 		// tambien debe fijarse si hay alguien en la cola esperando 
 		if (colaTurnos.isEmpty()) {
 			System.out.println("Pista totalmente vacia");
 		}
 		else { 
 			colaTurnos.remove();
-			asignarPista(posicion, av); // y asigna ese avion a la pista
+			asignarPista(av); // y asigna ese avion a la pista
 		}			
 	}
 
-	public void desasignarPista(Integer posicion, Avion av){
+	public void desasignarPista(Avion av){
 		// saca el avion del aray de pista despues de 30 segundos
-		p.add(posicion, null);
+		p.remove(av);
 		//p.coleccionPista[posicion]= null;	
 	}
 

@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -5,7 +6,7 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Queue;
 
-public class Avion implements TorreControl {
+public class Avion implements TorreControl, Serializable {
 
 	//clase cliente
 	//metodo a codificar: 
@@ -38,12 +39,7 @@ public class Avion implements TorreControl {
 		
 	}
 
-	public Integer posicionDisponiblePista() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void asignarPista(Integer posicion, Avion av) throws RemoteException {
+	public void asignarPista(Avion av) throws RemoteException {
 		// TODO Auto-generated method stub
 		
 	}
@@ -53,7 +49,7 @@ public class Avion implements TorreControl {
 		return null;
 	}
 
-	public void desasignarPista(Integer posicion, Avion av) throws RemoteException {
+	public void desasignarPista(Avion av) throws RemoteException {
 		// TODO Auto-generated method stub
 		
 	}
