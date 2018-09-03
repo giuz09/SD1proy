@@ -6,7 +6,7 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Queue;
 
-public class Avion implements TorreControl, Serializable {
+public class Avion extends Thread implements TorreControl, Serializable  {
 	
 	private String codigoAvion;
 
@@ -50,19 +50,10 @@ public class Avion implements TorreControl, Serializable {
 		
 	}
 
-	public void asignarPista(Avion av) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
 
-	public ArrayList<Avion> asignarTurno(Avion avion) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	public void desasignarPista(Avion av) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
+	
+
+
 
 }
