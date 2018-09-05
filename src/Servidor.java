@@ -10,7 +10,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class Servidor extends UnicastRemoteObject implements TorreControl, Runnable{
+public class Servidor extends UnicastRemoteObject implements TorreControl{
 	//agreado por lo de rmi	
 	private static final long serialVersionUID = 1L;
 	Integer nroPuerto;
@@ -18,10 +18,9 @@ public class Servidor extends UnicastRemoteObject implements TorreControl, Runna
 	Registry registro;
 	//
 	ArrayList<Avion> p = new ArrayList<Avion>();
-	
-	
+
 //agreado por lo de rmi	
-	public Servidor (Integer numeroPuertoRemoto) throws Exception{
+	public Servidor(Integer numeroPuertoRemoto) throws Exception {
 		super();
 		IP = InetAddress.getLocalHost().getHostAddress();
 		nroPuerto = numeroPuertoRemoto;
@@ -29,43 +28,34 @@ public class Servidor extends UnicastRemoteObject implements TorreControl, Runna
 		registro.bind("rmiServidor", this);
 		System.out.println("Servidor inicializado en ip: " + IP + " puerto: " + nroPuerto);
 	}
-	
 
-	public void atenderPeticion (Avion av) {
-		//recibe solicitud de avion solicitando pista
-		//verifica si hay pista disponible	
-		//Integer posicionPista =  posicionDisponiblePista();	
-		while (p.size()==5) {
-			//mientras la pista este llena espero que se desocupe un lugar
-			
+	public synchronized void atenderPeticion(Avion av) throws InterruptedException {
+
+		while (p.size() >= 5) {
+			try {
+				System.out.println("El avion " + av.getCodigoAvion() + " esta esperando");
+				wait();
+
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		//cuando se va un avion notifica a todos que hay un lugar libre	
-		
+		asignarPista(av);
+
+	}
+
+	public synchronized void asignarPista(Avion av) throws InterruptedException {
 		p.add(av);
-		administraAterrizajes(av);
-		System.out.println("Pista asignada al avion: "+av.getCodigoAvion());		
-					
+		System.out.println("Pista asignada al avion: " + av.getCodigoAvion());
+		wait(10000);
+		desasignarAvion(av);
 	}
 
-
-	
-	public void administraAterrizajes(Avion av) {
-		//cuentaTiempoEstacionado();este se remplaza po el wait
-			
+	public synchronized void desasignarAvion(Avion av) {
 		p.remove(av);
-		// tambien debe fijarse si hay alguien en la cola esperando 
-		
-	/*	if (colaTurnos.isEmpty()) {
-			System.out.println("No hay aviones esperando en la cola");
-		}
-		else { 
-			colaTurnos.remove(0);
-			asignarPista(av); // y asigna ese avion a la pista
-		}	*/
-		
+		System.out.println("El avion: " + av.getCodigoAvion() + " se fue de la pista");
+		notify();
 	}
-
-
-
 
 }

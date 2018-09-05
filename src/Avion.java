@@ -19,6 +19,10 @@ public class Avion extends Thread implements TorreControl, Serializable  {
 	private String direccionServidor;
 	private Integer puertoServidor;
 	
+	
+	
+	
+	
 	public String getCodigoAvion() {
 		return codigoAvion;
 	}
@@ -39,15 +43,39 @@ public class Avion extends Thread implements TorreControl, Serializable  {
 		this.rmiServidor = (TorreControl) registro.lookup("rmiServidor");
 	}
 	
-	public void solicitarPista(Avion av) throws RemoteException{
+	public void solicitarPista() throws RemoteException, InterruptedException{
 		//llamado el método remoto
-		rmiServidor.atenderPeticion(av);
-		System.out.println("Solcitud enviada");
+		rmiServidor.atenderPeticion(this);
 	}
 
 	public void atenderPeticion(Avion av) throws RemoteException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void asignarPista(Avion av) throws RemoteException, InterruptedException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void desasignarAvion(Avion av) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void run() {
+		// TODO Auto-generated method stub
+
+			try {
+				solicitarPista();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
 	}
 
 
