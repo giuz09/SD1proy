@@ -6,8 +6,12 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.sun.org.apache.xpath.internal.functions.Function;
+
+import jdk.internal.org.objectweb.asm.commons.GeneratorAdapter;
+
 public class mainCliente {
-	public static void main(String[] args) throws RemoteException, NotBoundException {
+	public static void main(String[] args) throws RemoteException, NotBoundException, InterruptedException {
 		final Avion A1 = new Avion("127.0.0.1", 2000,"A1");
 		final Avion A2 = new Avion("127.0.0.1", 2000,"A2");
 		final Avion A3 = new Avion("127.0.0.1", 2000,"A3");
@@ -16,42 +20,28 @@ public class mainCliente {
 		final Avion A6 = new Avion("127.0.0.1", 2000,"A6");
 		
 		
+		
+		A1.sleep(2000);
 		A1.start();
+		A2.sleep(3000);
 		A2.start();
+		A3.sleep(5000);
 		A3.start();
+		//A4.wait(generoAleatorio());
 		A4.start();
+		//A5.wait(generoAleatorio());
 		A5.start();
+		//A6.wait(generoAleatorio());
 		A6.start();
 		
-		/*
-		 
-		 Random tiempoRandom = new Random ();
-		 
-		Timer time = new Timer();
-		TimerTask lanzadorAvion = new TimerTask() {
-	
-		
 			
-				public void run() {
-				System.out.println("Se lanzo un avion");
-				try {
-					
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-					
-			}
-		};	
-		time.schedule(lanzadorAvion, tiempoRandom.nextInt(10)); //cuenta un tiempo random y llama al run de contador	
-				
-	*/
+		
 	}
-	
-	
-	
-	
-	
-	
+
+	private static Long generoAleatorio() {
+		Random tiempoRandom = new Random ();
+		return tiempoRandom.nextLong();
+		
+	}
 	
 }

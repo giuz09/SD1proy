@@ -5,6 +5,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Queue;
+import java.util.Random;
 
 public class Avion extends Thread implements TorreControl, Serializable  {
 	
@@ -64,9 +65,11 @@ public class Avion extends Thread implements TorreControl, Serializable  {
 	}
 
 	public void run() {
+		
 		// TODO Auto-generated method stub
 
 			try {
+				
 				solicitarPista();
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
