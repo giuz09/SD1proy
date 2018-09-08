@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.lang.reflect.Array;
+import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -11,8 +13,9 @@ import com.sun.org.apache.xpath.internal.functions.Function;
 
 import jdk.internal.org.objectweb.asm.commons.GeneratorAdapter;
 
+
 public class mainCliente {
-	public static void main(String[] args) throws RemoteException, NotBoundException, InterruptedException {
+	public static void main(String[] args) throws NotBoundException, InterruptedException, UnknownHostException, IOException {
 		final Avion A1 = new Avion("127.0.0.1", 2000,"A1");
 		final Avion A2 = new Avion("127.0.0.1", 2000,"A2");
 		final Avion A3 = new Avion("127.0.0.1", 2000,"A3");
@@ -29,6 +32,8 @@ public class mainCliente {
 		A5.start();A6.start();
 		A7.start();A8.start();
 		A9.start();A10.start();
+		
+		ClienteComunicacion cs = new ClienteComunicacion();
 		
 
  /*	
