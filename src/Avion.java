@@ -63,13 +63,20 @@ public class Avion extends Thread implements TorreControl, Serializable  {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+/*	private static Long generoAleatorio() {
+		Random tiempoRandom = new Random ();
+		//return (long) (tiempoRandom.nextInt());
+		return (long) ((Math.random() * 8000) + 1);
+		//return (long) tiempoRandom.nextDouble();
+		
+	}
+*/
 	public void run() {
 		
 		// TODO Auto-generated method stub
 
 			try {
-				
 				solicitarPista();
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block

@@ -34,7 +34,7 @@ public class Servidor extends UnicastRemoteObject implements TorreControl{
 		while (p.size() >= 5) {
 			try {
 				System.out.println("El avion " + av.getCodigoAvion() + " esta esperando");
-				wait();
+				av.wait();
 
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -42,20 +42,21 @@ public class Servidor extends UnicastRemoteObject implements TorreControl{
 			}
 		}
 		asignarPista(av);
-
 	}
 
+	
 	public synchronized void asignarPista(Avion av) throws InterruptedException {
 		p.add(av);
-		System.out.println("Pista asignada al avion: " + av.getCodigoAvion());
-		wait(10000);
+		System.out.println("Pista asignada al avion: " + av.getCodigoAvion()+", comienza a aterrizar");
+		wait(3000);
 		desasignarAvion(av);
 	}
 
+	
 	public synchronized void desasignarAvion(Avion av) {
 		p.remove(av);
 		System.out.println("El avion: " + av.getCodigoAvion() + " se fue de la pista");
-		notify();
+		av.notify();
 	}
 
 }
