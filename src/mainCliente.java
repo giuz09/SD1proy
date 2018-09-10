@@ -33,7 +33,7 @@ public class mainCliente {
 		A7.start();A8.start();
 		A9.start();A10.start();
 		
-		ClienteComunicacion cs = new ClienteComunicacion();
+		
 		
 
  /*	

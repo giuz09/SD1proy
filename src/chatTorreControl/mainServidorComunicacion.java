@@ -1,6 +1,6 @@
 package chatTorreControl;
 
-public class ApliServidor {
+public class mainServidorComunicacion {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
