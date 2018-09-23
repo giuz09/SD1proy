@@ -67,7 +67,7 @@ public class Avion extends Thread implements TorreControl, Serializable  {
 		// TODO Auto-generated method stub
 	
 			try {
-				this.sleep((long) ((Math.random() *100000) + 1));
+				sleep((long) ((Math.random() *50000) + 1));
 				solicitarPista();
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
