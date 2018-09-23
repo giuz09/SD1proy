@@ -11,10 +11,7 @@ public class Avion extends Thread implements TorreControl, Serializable  {
 	
 	private String codigoAvion;
 
-	//clase cliente
-	//metodo a codificar: 
-	//					solicitarPista()
-	//					aterrizar(posicion, pista array de aviones) //
+	
 	private TorreControl rmiServidor;
 	private Registry registro;
 	private String direccionServidor;
@@ -64,19 +61,13 @@ public class Avion extends Thread implements TorreControl, Serializable  {
 		
 	}
 	
-/*	private static Long generoAleatorio() {
-		Random tiempoRandom = new Random ();
-		//return (long) (tiempoRandom.nextInt());
-		return (long) ((Math.random() * 8000) + 1);
-		//return (long) tiempoRandom.nextDouble();
-		
-	}
-*/
+
 	public void run() {
 		
 		// TODO Auto-generated method stub
-
+	
 			try {
+				this.sleep((long) ((Math.random() *100000) + 1));
 				solicitarPista();
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block

@@ -27,42 +27,11 @@ public class mainCliente {
 		final Avion A9 = new Avion("127.0.0.1", 2000,"A9");
 		final Avion A10 = new Avion("127.0.0.1", 2000,"A10");
 		
-		A1.start();A2.start();
-		A3.start();A4.start();
-		A5.start();A6.start();
-		A7.start();A8.start();
-		A9.start();A10.start();
-		
-		
-		
 
- /*	
-  	final ArrayList<Avion> lanzador = new ArrayList<Avion>();
-		lanzador.add(A1);lanzador.add(A2);
-		lanzador.add(A3);lanzador.add(A4);
-		lanzador.add(A5);lanzador.add(A6);
-		lanzador.add(A7);lanzador.add(A8);
-		lanzador.add(A9);lanzador.add(A10);	
-			
-		final Integer i = 0;
-		Timer timer= new Timer();
 		
-		TimerTask tarea = new TimerTask() 
-	    { 
-	        public void run()  
-	        { 
-	    			lanzador.get(i).start();
-	    			
-	        } 
-	    };
-	    while (i<=9) {
-	    	Long numero = (long) ((Math.random() * 10000) + 1);
-	  	    timer.schedule(tarea, numero);	  				
-		}
-		*/
+		A1.start();A2.start();A3.start();A4.start();A5.start();
+		A6.start();A7.start();A8.start();A9.start();A10.start();
+
 	}
-	
-	
-
 		
 }
